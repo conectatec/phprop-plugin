@@ -35,7 +35,7 @@ class PhpropsController extends PhpropAppController {
 	}
 
 	function edit($key = null, $htmlEditor = 0, $translatorEditor = 0) {
-		//FIXME: para qu� sirve el id ??
+		//FIXME: para qué sirve el id ??
 		$this->set('id', '1');
 		$prop = $this->__readProps($key);
 		$this->set('key', $key);
@@ -56,7 +56,7 @@ class PhpropsController extends PhpropAppController {
 			$prop = $this->__readProps();
 			if (!empty ($prop)) {
 				// updating the prop
-				$prop[$key]['values'] = $this->params['form'];	
+				$prop[$key]['values'] = array_merge($prop[$key]['values'], $this->params['form']);	
 						
 				$props = $this->__saveProps($prop);
 

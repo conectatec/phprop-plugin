@@ -7,40 +7,40 @@ class LanguagesphpropsController extends AppController {
 	var $uses = array();
 	function beforeFilter(){
 		$this->languagesfile = TMP . 'languages.json';
-		
+
 	}
 
-	function index() 
+	function index()
 	{
 		$lang = $this->__readLang();
 		$this->set('lang', $lang);
-		
+
 	}
 
 	function update($id=null,$active=null) {
-			$lang = $this->__readLang($id);
-			if (!empty ($lang)) {
-				// updating the prop
-				$lang[$id]['active'] = $active;				
-				$lang = $this->__saveLang($lang);
+		$lang = $this->__readLang($id);
+		if (!empty ($lang)) {
+			// updating the prop
+			$lang[$id]['active'] = $active;
+			$lang = $this->__saveLang($lang);
 
-			}
 		}
-	
+	}
+
 	function add() {
 		if ($this->data) {
-			$id = $this->data['Languagesphprop']['key'];
+			$id = String::uuid();
 			$locale = $this->data['Languagesphprop']['locale'];
-			$ident= $this->data['Languagesphprop']['key'];
-			$hash = $this->data['Languagesphprop']['hash'];
+			$ident= $id;
 			$text = $this->data['Languagesphprop']['text'];
+			$hash = $this->__slug($text);
 			$active = $this->data['Languagesphprop']['active'];
-			
+				
 			$lang = $this->__readLang();
 			if (@ !isset ($lang[$id])) {
 				// saves the new key
 				$this->__saveNewLang($id, $locale, $hash, $text, $ident, $active);
-				
+
 				$this->Session->setFlash("Language has been added");
 				$this->redirect(array('action'=>'index'));
 			} else {
@@ -52,19 +52,27 @@ class LanguagesphpropsController extends AppController {
 		}
 
 	}
+
+	function __slug($str){
+		$str = strtolower(trim($str));
+		$str = preg_replace('/[^a-z0-9-]/', '', $str);
+		$str = preg_replace('/-+/', "", $str);
+		return $str;
+	}
+
 	function off($id){
 		$this->update($id,0);
 		$this->redirect(array('action'=>'index'));
-		
+
 	}
 	function on($id){
 		$this->update($id,1);
 		$this->redirect(array('action'=>'index'));
-		
-	}
-	
 
-	
+	}
+
+
+
 	function __saveNewLang($id, $locale, $hash, $text, $ident, $active) {
 		$lang = $this->__readLang();
 		$lang[$id] = array (
@@ -81,18 +89,18 @@ class LanguagesphpropsController extends AppController {
 		fwrite($fh, json_encode($lang));
 		fclose($fh);
 	}
-	
-	
+
+
 	function __readLang($key = null) {
-	
-			$file = new File($this->languagesfile);
-			if (!$file->exists()){
-				$file->create();
-			}
-			$filecontent = file_get_contents($this->languagesfile);
-			$lang = json_decode($filecontent, true);
-			//debug($props);
-			return $lang;
+
+		$file = new File($this->languagesfile);
+		if (!$file->exists()){
+			$file->create();
+		}
+		$filecontent = file_get_contents($this->languagesfile);
+		$lang = json_decode($filecontent, true);
+		//debug($props);
+		return $lang;
 	}
 
 }

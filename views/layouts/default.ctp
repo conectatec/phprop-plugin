@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 
-	<?php echo $html->charset('ISO-8859-1'); ?>
+	<?php echo $html->charset(); ?>
 	<title>
 		<?php echo $title_for_layout; ?>
 	</title>

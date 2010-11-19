@@ -20,7 +20,7 @@ $cadena="var locales =[";
 $aux=null;
 foreach($idiomas as $clave => $lang){
 $idioma=$lang['locale'];
-$aux[].="{id: ".$lang['ident'].", " ;
+$aux[].="{id: '".$lang['ident']."', " ;
 $aux[].="locale: '".$lang['locale']."', " ;
 $aux[].="hash: '".$lang['hash']."', " ;
 $aux[].="text: '".$lang['text']."', " ;
