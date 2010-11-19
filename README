@@ -1,3 +1,12 @@
 Phprop CakePHP Plugin
 
 phprop-plugin is a cakephp plugin to manage multilanguage html content based on a json properties file
+
+this is not a PO file manager
+this is not a Translatable Behaviour replacement
+
+this is a user managed multilanguage and html content alternative for small projects (file bottleneck is present)
+
+Thanks to:
+
+https://github.com/jameswatts and his awesome Javascript Framework http://www.nanojs.org/ 
