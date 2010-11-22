@@ -92,9 +92,11 @@ var phprop = {
 		phprop.send();
 	},
 	cancel: function cancel() {
-	var ruta = location.href;
+	/*var ruta = location.href;
 	x=ruta.indexOf('phprops');
 	document.location.href=ruta.substr(0,x)+'phprops';
+	*/
+		window.close();
 	},
 	send: function send() {
 		var form = new nano({tag: 'form', parent: nano.body(), action: phprop.actionURL, method: 'post'});

@@ -22,7 +22,7 @@
 			}
 			
 			
-			echo "['$key', '$defaultValue', '$htmCheckbox', '$translatedCheckbox', '" . $html->link(__('Edit', true), array('controller' => 'phprops', 'action' => 'edit', $key, $prop['isHTML'], $prop['isTranslated']))."   ".$html->link(__('Delete', true), array('controller' => 'phprops', 'action' => 'delete', $key),null,('Are you sure delete key '. $key.'?')) . "'],";
+			echo "['$key', '$defaultValue', '$htmCheckbox', '$translatedCheckbox', '" . $html->link(__('Edit', true), array('controller' => 'phprops', 'action' => 'edit', $key, $prop['isHTML'], $prop['isTranslated']), array('target' => '_blank'))."   ".$html->link(__('Delete', true), array('controller' => 'phprops', 'action' => 'delete', $key),null,('Are you sure delete key '. $key.'?')) . "'],";
 		} 
 		}
 		?>
@@ -33,8 +33,8 @@
 
 <div id="phprop-box">
 	<div id="phprop-table"></div><br><br>
-<?php echo $html->link(__('Add Key', true), array('controller' => 'phprops', 'action' => 'add'));?>
-<?php echo " <br>"?>
-<?php echo $html->link(__('Config Languages', true), array('controller' => 'languagesphprops', 'action' => 'index'));?>
+<?php echo $html->link(__('Update Keys', true), array('controller' => 'phprops', 'action' => 'index'));?>
+<br><br><?php echo $html->link(__('Add Key', true), array('controller' => 'phprops', 'action' => 'add'), array('target' => '_blank'));?>
+<br><br><?php echo $html->link(__('Config Languages', true), array('controller' => 'languagesphprops', 'action' => 'index'));?>
 
 </div>		

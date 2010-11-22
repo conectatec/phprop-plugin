@@ -38,6 +38,13 @@ class PhpropsController extends PhpropAppController {
 		//FIXME: para qué sirve el id ??
 		$this->set('id', '1');
 		$prop = $this->__readProps($key);
+		//check if prop exixts
+		if (!@isset($prop[$key])){
+			// key does not exist, saving prop
+			$this->__saveNewProp($key, $htmlEditor, $translatorEditor, '');
+			$prop = $this->__readProps($key);
+		}
+		
 		$this->set('key', $key);
 		$this->set('htmlValue', $htmlEditor);
 		$this->set('translatedValue', $translatorEditor);
@@ -55,8 +62,11 @@ class PhpropsController extends PhpropAppController {
 			// form processing (save)
 			$prop = $this->__readProps();
 			if (!empty ($prop)) {
+				// default prop structure
+				
 				// updating the prop
-				$prop[$key]['values'] = array_merge($prop[$key]['values'], $this->params['form']);	
+				$prop[$key]['values'] = array_merge($prop[$key]['values'], $this->params['form']);
+				debug($prop[$key]['values']);	
 						
 				$props = $this->__saveProps($prop);
 
